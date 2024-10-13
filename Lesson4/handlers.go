@@ -2,6 +2,7 @@ package main
 
 import (
 	"log/slog"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -30,5 +31,22 @@ func getAuthorsOrAuthorByIdHandler(c *fiber.Ctx) error {
 	}
 
 	slog.Info("request to get author by ID", "authorId", authorId)
+	return nil
+}
+func getItemsHandler(c *fiber.Ctx) error {
+	itemPath := c.Params("*")
+
+	if itemPath == "" {
+		slog.Info("request all items")
+		return nil
+	}
+
+	slog.Info("request to get an item with sub-paths:", "itemPath", itemPath)
+	subPaths := strings.Split(itemPath, "/")
+
+	for _, subPath := range subPaths {
+		slog.Info("\titem subPath", "subPath", subPath)
+	}
+
 	return nil
 }

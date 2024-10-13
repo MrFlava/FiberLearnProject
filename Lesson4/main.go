@@ -18,6 +18,7 @@ func main() {
 	app.Get("/Books", getAllBooksUCHnalder).Name("Get all boks uppercase")
 	app.Get("/books/:id", getBookByIdHandler).Name("Get book by ID")
 	app.Get("/author/:id?", getAuthorsOrAuthorByIdHandler).Name("Get all authors or a specific author")
+	app.Get("/items/*", getItemsHandler).Name("Get items with wildcard")
 
 	err := app.Listen(":3000")
 	if err != nil {
